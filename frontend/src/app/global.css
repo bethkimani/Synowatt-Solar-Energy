@@ -1,10 +1,38 @@
-/* FONT IMPORTS */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
 
-/* TAILWIND V4 IMPORT */
 @import "tailwindcss";
 
-/* ALL OTHER CUSTOM CSS */
+@theme {
+  /*
+  |--------------------------------------------------------------------------
+  | Synowatt Brand Colors
+  |--------------------------------------------------------------------------
+  */
+
+  --color-brand-dark: #222222;
+  --color-accent: #d4a017;
+  --color-ink: #222222;
+
+  /*
+  |--------------------------------------------------------------------------
+  | Typography
+  |--------------------------------------------------------------------------
+  */
+
+  --font-display: 'Manrope', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Base
+|--------------------------------------------------------------------------
+*/
+
 html {
   scroll-behavior: smooth;
 }
@@ -16,20 +44,111 @@ html {
 }
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
-  color: #222222;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
   background: #ffffff;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/*
+|--------------------------------------------------------------------------
+| Display Font
+|--------------------------------------------------------------------------
+*/
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Section anchors
+|--------------------------------------------------------------------------
+*/
 
 section[id] {
   scroll-margin-top: 72px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Hidden scrollbar
+|--------------------------------------------------------------------------
+*/
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
 
-.no-scrollbar {
-  scrollbar-width: none;
+/*
+|--------------------------------------------------------------------------
+| Text selection
+|--------------------------------------------------------------------------
+*/
+
+::selection {
+  background: color-mix(
+    in srgb,
+    var(--color-accent) 20%,
+    transparent
+  );
+  color: var(--color-brand-dark);
 }
+
+/*
+|--------------------------------------------------------------------------
+| Images
+|--------------------------------------------------------------------------
+*/
+
+img {
+  max-width: 100%;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Interactive elements
+|--------------------------------------------------------------------------
+*/
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Accessibility
+|--------------------------------------------------------------------------
+*/
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Reduced motion
+|--------------------------------------------------------------------------
+*/
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
