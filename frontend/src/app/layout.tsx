@@ -7,12 +7,13 @@ import './global.css';
 
 export const metadata: Metadata = {
   title: 'Synowatt Solar Energy',
-  description: 'Reliable solar energy solutions for homes, businesses and institutions in Kenya — hybrid solar systems, lithium battery storage, professional installation and support.',
+  description:
+    'Reliable solar energy solutions for homes, businesses and institutions in Kenya — hybrid solar systems, lithium battery storage, professional installation and support.',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>
         <Navbar />
         <main>{children}</main>
