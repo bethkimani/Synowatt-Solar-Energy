@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { Footer } from '@/components/Footer';
 import { FloatingContact } from '@/components/FloatingContact';
@@ -9,6 +9,11 @@ export const metadata: Metadata = {
   title: 'Synowatt Solar Energy',
   description:
     'Reliable solar energy solutions for homes, businesses and institutions in Kenya — hybrid solar systems, lithium battery storage, professional installation and support.',
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

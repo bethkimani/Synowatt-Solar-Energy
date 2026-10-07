@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -5,6 +7,7 @@ import { ArrowRightIcon, CheckIcon } from 'lucide-react';
 import { ParallaxImage } from '../ParallaxImage';
 import { Reveal } from '../Reveal';
 import type { Service } from '../../types/content';
+import { services } from '../../data/services';
 import { buttonClasses } from '../../utils/button';
 import { EASE_OUT } from '../../utils/motion';
 import { quoteHref } from '../../utils/quote';
@@ -19,7 +22,6 @@ export function ServiceDetail({ service, reverse = false }: ServiceDetailProps) 
 
   return (
     <article
-      id={service.slug}
       aria-labelledby={`${service.slug}-title`}
       className="grid scroll-mt-28 items-center gap-12 lg:grid-cols-2 lg:gap-20">
       
@@ -30,8 +32,8 @@ export function ServiceDetail({ service, reverse = false }: ServiceDetailProps) 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.15 }}
-          className={`absolute -bottom-6 grid h-16 w-16 place-items-center rounded-2xl bg-white text-brand-dark shadow-[0_12px_30px_rgba(34,34,34,0.14)] ${
-          reverse ? 'right-6' : 'left-6'}`
+          className={`absolute bottom-4 grid h-16 w-16 place-items-center rounded-2xl bg-white text-brand-dark shadow-[0_12px_30px_rgba(34,34,34,0.14)] ${
+          reverse ? 'right-4' : 'left-4'}`
           }>
           
           <Icon className="h-8 w-8" aria-hidden />
@@ -84,4 +86,10 @@ export function ServiceDetail({ service, reverse = false }: ServiceDetailProps) 
       </div>
     </article>);
 
+}
+
+export function ServiceDetailBySlug({ slug }: { slug: string }) {
+  const service = services.find((item) => item.slug === slug);
+  if (!service) throw new Error(`Service data is missing for slug "${slug}".`);
+  return <ServiceDetail service={service} />;
 }

@@ -38,7 +38,7 @@ export function ServiceHighlights() {
                 transition={{ duration: 0.3, ease: EASE_OUT, delay: i * 0.06 }}>
                 
                 <Link
-                  href={`/services#${service.slug}`}
+                  href={`/services/${service.slug}`}
                   className="group flex h-full w-full flex-col rounded-2xl border border-ink/[0.07] bg-white p-6 text-left shadow-[0_1px_2px_rgba(34,34,34,0.04)] transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:border-brand/40 hover:shadow-[0_18px_40px_rgba(0,120,42,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
                   
                   <span className="grid h-12 w-12 place-items-center rounded-xl bg-brand-tint text-brand-dark transition-[background-color,color,transform] duration-200 group-hover:-rotate-6 group-hover:bg-brand-dark group-hover:text-white">

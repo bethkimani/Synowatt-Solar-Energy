@@ -12,9 +12,9 @@ export const navItems: NavItem[] = [
 
 
 export const footerServices: NavItem[] = [
-{ label: 'Solar Installation', to: '/services#solar-installation' },
-{ label: 'Hybrid Systems', to: '/services#hybrid-solar-systems' },
-{ label: 'Lithium Batteries', to: '/services#lithium-battery-storage' },
-{ label: 'Solar Maintenance', to: '/services#maintenance-support' },
-{ label: 'Commercial Solar', to: '/services#commercial-industrial' },
-{ label: 'Residential Solar', to: '/services#residential-solar' }];
+{ label: 'Solar Installation', to: '/services/solar-installation' },
+{ label: 'Hybrid Systems', to: '/services/hybrid-solar-systems' },
+{ label: 'Lithium Batteries', to: '/services/lithium-battery-storage' },
+{ label: 'Solar Maintenance', to: '/services/maintenance-support' },
+{ label: 'Commercial Solar', to: '/services/commercial-industrial' },
+{ label: 'Residential Solar', to: '/services/residential-solar' }];

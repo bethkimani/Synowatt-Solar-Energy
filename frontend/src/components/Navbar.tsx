@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -16,6 +16,7 @@ import { EASE_OUT } from '../utils/motion';
 export function Navbar() {
   const [scrolled, setScrolled] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const pathname = usePathname();
 
@@ -39,13 +40,37 @@ export function Navbar() {
     };
   }, []);
 
-  /*
-   * Automatically close the mobile menu
-   * whenever the route changes.
-   */
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) setOpen(false);
+    };
+    const closeOnHistoryNavigation = () => setOpen(false);
+
+    desktopQuery.addEventListener('change', closeOnDesktop);
+    window.addEventListener('popstate', closeOnHistoryNavigation);
+    return () => {
+      desktopQuery.removeEventListener('change', closeOnDesktop);
+      window.removeEventListener('popstate', closeOnHistoryNavigation);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      menuButtonRef.current?.focus();
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
 
   /*
    * Prevent the page behind the mobile menu
@@ -133,15 +158,15 @@ export function Navbar() {
         {/* Desktop CTA + Mobile Menu Button */}
         <div className="flex items-center gap-2">
           {/* Desktop Quote Button */}
-          <Link
-            href="/contact#quote"
-            className={`${buttonClasses('primary', 'md')} hidden sm:inline-flex`}
-          >
-            Get a Free Quote
-          </Link>
+          <div className="hidden sm:block">
+            <Link href="/contact#quote" className={buttonClasses('primary', 'md')}>
+              Get a Free Quote
+            </Link>
+          </div>
 
           {/* Mobile Menu Button */}
           <button
+            ref={menuButtonRef}
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
@@ -287,6 +312,7 @@ export function Navbar() {
               {/* WhatsApp */}
               <a
                 href={company.whatsappHref}
+                onClick={() => setOpen(false)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={buttonClasses('green', 'lg')}
@@ -298,6 +324,7 @@ export function Navbar() {
               {/* Phone */}
               <a
                 href={company.phoneHref}
+                onClick={() => setOpen(false)}
                 className={buttonClasses('outline', 'lg')}
               >
                 <PhoneIcon className="h-5 w-5 text-brand-dark" />
@@ -310,4 +337,3 @@ export function Navbar() {
     </header>
   );
 }
-

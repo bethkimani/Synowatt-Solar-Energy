@@ -273,7 +273,7 @@ export function ContactForm() {
                 <legend className="text-sm font-semibold text-ink">
                   Property type<span className="text-accent"> *</span>
                 </legend>
-                <div id="field-property" tabIndex={-1} className="mt-2 grid grid-cols-3 gap-2 focus:outline-none">
+                <div id="field-property" tabIndex={-1} className="mt-2 grid gap-2 focus:outline-none sm:grid-cols-3">
                   {propertyTypes.map((p) => {
                   const checked = form.property === p;
                   return (

@@ -5,7 +5,7 @@ import { SocialIcon } from './SocialIcon';
 import { company } from '../data/company';
 import { footerServices, navItems } from '../data/navigation';
 
-const linkClass = 'text-white/70 transition-colors duration-150 hover:text-white';
+const linkClass = 'inline-flex min-h-11 items-center text-white/70 transition-colors duration-150 hover:text-white';
 
 export function Footer() {
   return (
@@ -30,7 +30,7 @@ export function Footer() {
                   <a
                   href={s.href}
                   aria-label={s.label}
-                  className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-white transition-[background-color,transform] duration-150 hover:-translate-y-0.5 hover:bg-brand-dark">
+                  className="grid h-11 w-11 place-items-center rounded-full bg-white/10 text-white transition-[background-color,transform] duration-150 hover:-translate-y-0.5 hover:bg-brand-dark">
                   
                     <SocialIcon name={s.label} />
                   </a>

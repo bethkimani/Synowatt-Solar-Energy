@@ -47,7 +47,7 @@ export default function ContactPage() {
       </PageHero>
 
       <section aria-label="Request a quote and contact details" className="bg-brand-tint py-20 lg:py-28">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 lg:grid-cols-[1fr_1.3fr] lg:gap-14 lg:px-8">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-5 lg:grid-cols-[1fr_1.3fr] lg:gap-14 lg:px-8">
           <div className="order-2 lg:order-1">
             <Reveal>
               <h2 className="font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-ink sm:text-4xl">
@@ -86,7 +86,7 @@ export default function ContactPage() {
               </dl>
             </Reveal>
 
-            <Reveal delay={0.1} className="mt-6 grid grid-cols-3 gap-2">
+            <Reveal delay={0.1} className="mt-6 grid gap-2 sm:grid-cols-3">
               <a href={company.phoneHref} className={`${buttonClasses('outline', 'md')} px-3`}>
                 <PhoneIcon className="h-4 w-4 text-brand-dark" />
                 Call
