@@ -8,11 +8,9 @@ import {
   CheckIcon,
   CircleCheckIcon,
   LoaderCircleIcon,
-  MailIcon,
   MessageCircleIcon,
-  PhoneIcon,
-  SendIcon } from
-'lucide-react';
+  SendIcon,
+} from 'lucide-react';
 import { services } from '../../data/services';
 import { solarPackages } from '../../data/solutions';
 import { energyNeedOptions, integrations, propertyTypes } from '../../data/contact';
@@ -38,7 +36,7 @@ const serviceOptions = [...services.map((s) => s.title), 'Not sure yet — I nee
 const solutionOptions = [...solarPackages.map((p) => p.name), 'Custom-sized system', 'Not sure — please recommend one'];
 
 const inputClass =
-'mt-2 block w-full rounded-xl border bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/40 transition-[border-color,box-shadow] duration-150 focus:outline-none focus:ring-4 focus:ring-brand/15';
+  'mt-2 block w-full rounded-xl border bg-white px-4 py-3 text-[15px] text-ink placeholder:text-ink/40 transition-[border-color,box-shadow] duration-150 focus:outline-none focus:ring-4 focus:ring-brand/15';
 
 export function ContactForm() {
   const params = useSearchParams();
@@ -46,24 +44,6 @@ export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<Status>('idle');
   const [prefilled, setPrefilled] = useState<string | null>(null);
-  /** True only when a real backend confirmed receipt. */
-  const [delivered, setDelivered] = useState(false);
-
-  const summary = [
-  'Hello Synowatt, I’d like a free solar quote.',
-  `Name: ${form.name}`,
-  `Phone: ${form.phone}`,
-  form.email && `Email: ${form.email}`,
-  `Property type: ${form.property}`,
-  `Service: ${form.service}`,
-  form.solution && `Preferred solution: ${form.solution}`,
-  form.energy && `Energy needs: ${form.energy}`,
-  form.message && `Message: ${form.message}`].
-
-  filter(Boolean).
-  join('\n');
-  const whatsappHandoff = `https://wa.me/${company.whatsappNumber}?text=${encodeURIComponent(summary)}`;
-  const emailHandoff = `mailto:${company.email}?subject=${encodeURIComponent('Solar quote request')}&body=${encodeURIComponent(summary)}`;
 
   useEffect(() => {
     const service = services.find((s) => s.slug === params.get('service'));
@@ -108,21 +88,19 @@ export function ContactForm() {
       document.getElementById(`field-${first}`)?.focus();
       return;
     }
-    if (!integrations.quoteEndpoint) {
-      // No backend connected yet — nothing is sent. The success screen hands the request over to WhatsApp/email.
-      setDelivered(false);
-      setStatus('success');
-      return;
-    }
     setStatus('submitting');
     try {
-      const res = await fetch(integrations.quoteEndpoint, {
+      const res = await fetch(integrations.quoteEndpoint || '/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
       });
-      if (!res.ok) throw new Error('Request failed');
-      setDelivered(true);
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok) {
+        throw new Error(data?.error || 'Failed to send your request. Please try again.');
+      }
+
       setStatus('success');
     } catch {
       setStatus('error');
@@ -141,88 +119,72 @@ export function ContactForm() {
   return (
     <div className="relative rounded-3xl bg-white p-7 shadow-[0_24px_60px_rgba(34,34,34,0.10)] ring-1 ring-ink/[0.06] sm:p-10">
       <AnimatePresence mode="wait" initial={false}>
-        {status === 'success' ?
-        <motion.div
-          key="success"
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: EASE_OUT }}
-          className="flex min-h-[560px] flex-col items-center justify-center text-center"
-          role="status">
-          
+        {status === 'success' ? (
+          <motion.div
+            key="success"
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE_OUT }}
+            className="flex min-h-[520px] flex-col items-center justify-center text-center"
+            role="status"
+          >
             <motion.span
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.25, ease: EASE_OUT, delay: 0.1 }}
-            className="grid h-20 w-20 place-items-center rounded-full bg-brand-tint">
-            
+              initial={{ scale: 0.96, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.25, ease: EASE_OUT, delay: 0.1 }}
+              className="grid h-20 w-20 place-items-center rounded-full bg-brand-tint"
+            >
               <CircleCheckIcon className="h-11 w-11 text-brand" aria-hidden />
             </motion.span>
-            <h3 className="mt-6 font-display text-2xl font-extrabold text-ink sm:text-3xl">
-              {delivered ? `Thank you, ${form.name.trim().split(' ')[0]}!` : `Almost done, ${form.name.trim().split(' ')[0]}`}
-            </h3>
-            <p className="mt-3 max-w-md leading-relaxed text-ink/70">
-              {delivered ?
-            <>
-                  Your quote request has been sent. A Synowatt solar expert will contact you on{' '}
-                  <span className="font-semibold text-ink">{form.phone}</span> to discuss your energy needs.
-                </> :
 
-            <>
-                  Your details are ready. To reach our team, send them on WhatsApp or by email — everything is
-                  already filled in for you.
-                </>
-            }
+            <h3 className="mt-6 font-display text-2xl font-extrabold text-ink sm:text-3xl">
+              Thank you, {form.name.trim().split(' ')[0]}!
+            </h3>
+
+            <p className="mt-3 max-w-md leading-relaxed text-ink/75 text-sm sm:text-base">
+              Your solar quote request has been sent directly to our engineering team. An EPRA-certified Synowatt
+              specialist will review your requirements and contact you on{' '}
+              <strong className="text-ink">{form.phone}</strong> shortly.
             </p>
-            <dl className="mt-8 w-full max-w-sm divide-y divide-ink/10 rounded-2xl bg-brand-tint px-5 text-left text-sm">
+
+            <dl className="mt-6 w-full max-w-sm divide-y divide-ink/10 rounded-2xl bg-brand-tint/60 px-5 text-left text-sm border border-brand/15">
               {[
-            { label: 'Property', value: form.property },
-            { label: 'Service', value: form.service },
-            { label: 'Solution', value: form.solution || 'To be recommended' }].
-            map((row) =>
-            <div key={row.label} className="flex justify-between gap-4 py-3">
+                { label: 'Property', value: form.property },
+                { label: 'Service', value: form.service },
+                { label: 'Solution', value: form.solution || 'To be recommended' },
+              ].map((row) => (
+                <div key={row.label} className="flex justify-between gap-4 py-3">
                   <dt className="text-ink/60">{row.label}</dt>
                   <dd className="text-right font-semibold text-ink">{row.value}</dd>
                 </div>
-            )}
+              ))}
             </dl>
-            {delivered ?
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a href={company.whatsappHref} target="_blank" rel="noreferrer" className={buttonClasses('green', 'md')}>
-                  <MessageCircleIcon className="h-4 w-4" />
-                  Chat on WhatsApp
-                </a>
-                <Link href="/" className={buttonClasses('outline', 'md')}>
-                  Back to Home
-                </Link>
-              </div> :
 
-          <div className="mt-8 flex w-full max-w-sm flex-col gap-3">
-                <a href={whatsappHandoff} target="_blank" rel="noreferrer" className={`${buttonClasses('green', 'lg')} w-full`}>
-                  <MessageCircleIcon className="h-5 w-5" />
-                  Send via WhatsApp
-                </a>
-                <div className="grid grid-cols-2 gap-3">
-                  <a href={emailHandoff} className={buttonClasses('outline', 'md')}>
-                    <MailIcon className="h-4 w-4 text-brand-dark" />
-                    Email
-                  </a>
-                  <a href={company.phoneHref} className={buttonClasses('outline', 'md')}>
-                    <PhoneIcon className="h-4 w-4 text-brand-dark" />
-                    Call
-                  </a>
-                </div>
-              </div>
-          }
+            <div className="mt-8 flex flex-col sm:flex-row gap-3 w-full max-w-sm justify-center">
+              <Link href="/" className={`${buttonClasses('outline', 'md')} flex-1 justify-center`}>
+                Back to Home
+              </Link>
+              <a
+                href={company.whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className={`${buttonClasses('green', 'md')} flex-1 justify-center`}
+              >
+                <MessageCircleIcon className="h-4 w-4" />
+                Chat on WhatsApp
+              </a>
+            </div>
+
             <button
-            type="button"
-            onClick={reset}
-            className="mt-5 text-sm font-semibold text-brand-dark underline-offset-4 hover:underline">
-            
+              type="button"
+              onClick={reset}
+              className="mt-6 text-xs font-semibold text-brand-dark underline-offset-4 hover:underline"
+            >
               Send another request
             </button>
-          </motion.div> :
+          </motion.div>
+        ) : (
 
         <motion.form
           key="form"
@@ -368,10 +330,10 @@ export function ContactForm() {
           }
             <p className="mt-4 text-center text-xs text-ink/50">We’ll only use your details to respond to your enquiry.</p>
           </motion.form>
-        }
+        )}
       </AnimatePresence>
-    </div>);
-
+    </div>
+  );
 }
 
 interface FieldProps {

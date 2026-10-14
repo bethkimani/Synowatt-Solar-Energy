@@ -75,9 +75,11 @@ export function BlogContent() {
   const shown = results.slice(0, visibleCount);
   const activeLabel = categoryOptions.find((c) => c.slug === activeCategory)?.label ?? 'All Articles';
 
-  useEffect(() => {
+  const [prevFilter, setPrevFilter] = useState({ category: activeCategory, query });
+  if (prevFilter.category !== activeCategory || prevFilter.query !== query) {
+    setPrevFilter({ category: activeCategory, query });
     setVisibleCount(PAGE_SIZE);
-  }, [activeCategory, query]);
+  }
 
   const updateParam = (key: 'category' | 'q', value: string) => {
     const next = new URLSearchParams(params.toString());

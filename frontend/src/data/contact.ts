@@ -5,7 +5,7 @@
  * and the newsletter form tells visitors sign-ups aren't live yet.
  */
 export const integrations: {quoteEndpoint: string | null;newsletterEndpoint: string | null;} = {
-  quoteEndpoint: null,
+  quoteEndpoint: '/api/contact',
   newsletterEndpoint: null
 };
 
