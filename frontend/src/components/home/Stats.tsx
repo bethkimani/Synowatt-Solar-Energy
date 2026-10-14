@@ -1,3 +1,5 @@
+'use client';
+
 import { Counter } from "../Counter";
 import { Reveal } from "../Reveal";
 import { stats } from "@/data/hero";

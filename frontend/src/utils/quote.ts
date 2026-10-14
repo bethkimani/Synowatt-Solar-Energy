@@ -5,6 +5,8 @@ export interface QuoteDetail {
   solution?: string;
   /** Residential | Commercial | Institutional */
   property?: string;
+  /** Optional location / town */
+  location?: string;
 }
 
 /** Builds a link to the contact page that preselects the given service, package or property type. */

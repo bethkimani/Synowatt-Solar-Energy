@@ -88,9 +88,18 @@ export default function BlogPostPage() {
 
   const related = getRelatedPosts(post, allPosts);
   const showToc = post.sections.length >= 3;
+  const articleSchema = articleJsonLd(
+    post,
+    `https://${company.website}/blog/${post.slug}`
+  );
 
   return (
     <>
+      {/* Schema.org Article Structured Data without dangerouslySetInnerHTML */}
+      <script type="application/ld+json">
+        {JSON.stringify(articleSchema)}
+      </script>
+
       <ArticleHeader post={post} />
 
       <section className="bg-white pb-24 pt-14 lg:pb-32 lg:pt-20">

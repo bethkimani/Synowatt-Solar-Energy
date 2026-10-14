@@ -19,6 +19,16 @@ export interface Stat {
   label: string;
 }
 
+export interface ServiceFaq {
+  question: string;
+  answer: string;
+}
+
+export interface ServiceFeature {
+  title: string;
+  description: string;
+}
+
 export interface Service {
   slug: string;
   title: string;
@@ -28,6 +38,11 @@ export interface Service {
   imageAlt: string;
   benefits: string[];
   applications: string[];
+  tagline?: string;
+  longDescription?: string[];
+  features?: ServiceFeature[];
+  faqs?: ServiceFaq[];
+  relatedServices?: string[];
 }
 
 export interface SolarPackage {
@@ -48,6 +63,18 @@ export interface SolarPackage {
    * Leave null to show "Pricing on request".
    */
   price: string | null;
+  serviceLink?: string;
+  serviceTitle?: string;
+  tagline?: string;
+  description?: string;
+  dailyGeneration?: string;
+  backupDuration?: string;
+  idealAppliances?: { name: string; runtime: string; notes?: string }[];
+  technicalSpecs?: { label: string; value: string }[];
+  whatsIncludedDetailed?: { title: string; description: string }[];
+  whyChoose?: string[];
+  faqs?: { question: string; answer: string }[];
+  relatedSolutions?: string[];
 }
 
 export interface Appliance {
@@ -95,6 +122,12 @@ export interface Project {
   description: string;
   image: string;
   location?: string;
+  capacity?: string;
+  hardware?: string[];
+  impact?: string;
+  serviceSlug?: string;
+  solutionSlug?: string;
+  completionDate?: string;
 }
 
 export type BlogCategory =
