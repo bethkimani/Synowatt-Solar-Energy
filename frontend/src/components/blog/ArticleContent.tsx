@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { InfoIcon } from 'lucide-react';
 import type { ArticleBlock, BlogPost } from '../../types/content';
 
@@ -62,7 +63,13 @@ function Block({ block }: {block: ArticleBlock;}) {
     case 'image':
       return (
         <figure className="mt-8">
-          <img src={block.src} alt={block.alt} loading="lazy" className="aspect-[16/9] w-full rounded-2xl object-cover" />
+          <Image
+            src={block.src}
+            alt={block.alt}
+            width={1200}
+            height={675}
+            className="aspect-[16/9] w-full rounded-2xl object-cover"
+          />
           {block.caption && <figcaption className="mt-3 text-sm text-ink/55">{block.caption}</figcaption>}
         </figure>);
 

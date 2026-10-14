@@ -16,7 +16,6 @@ import {
   TrendingUpIcon,
   ZapIcon,
 } from 'lucide-react';
-import { company } from '@/data/company';
 import { buttonClasses } from '@/utils/button';
 import { quoteHref } from '@/utils/quote';
 

@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -21,7 +20,6 @@ import {
 import { Reveal } from '../Reveal';
 import type { SolarPackage } from '../../types/content';
 import { solarPackages } from '../../data/solutions';
-import { company } from '../../data/company';
 import { buttonClasses } from '../../utils/button';
 import { quoteHref } from '../../utils/quote';
 

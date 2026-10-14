@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRightIcon } from 'lucide-react';
 import { Reveal } from '../Reveal';
 import { PostMeta } from './PostMeta';
@@ -15,10 +16,13 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
     <Reveal>
       <article className="group grid overflow-hidden rounded-3xl bg-white shadow-[0_24px_60px_rgba(34,34,34,0.08)] ring-1 ring-ink/[0.06] lg:grid-cols-[1.2fr_1fr]">
         <Link href={`/blog/${post.slug}`} className="relative block aspect-[16/10] overflow-hidden lg:aspect-auto lg:min-h-[460px]" tabIndex={-1} aria-hidden>
-          <img
+          <Image
             src={post.coverImage}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]" />
+            alt={post.coverAlt || post.title}
+            fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+          />
           
           <span className="absolute left-5 top-5 rounded-full bg-accent px-3 py-1 text-xs font-bold text-ink shadow-sm">
             Featured

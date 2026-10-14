@@ -710,7 +710,7 @@ export function contactPageJsonLd(): Record<string, unknown> {
         url: `${baseUrl}/contact`,
         name: 'Contact Synowatt Power & Solar Ltd | Free Solar Quote Kenya',
         description:
-          'Request a free solar energy assessment and quote from Synowatt Power & Solar Ltd. Call or WhatsApp +254 799 188 830, email info@synowatt.com, or visit us at Mountain Mall, Thika Road, Nairobi.',
+          'Request a free solar energy assessment and quote from Synowatt Power & Solar Ltd. Call or WhatsApp +254 799 188 830, email synowatt@gmail.com, or visit us at Mountain Mall, Thika Road, Nairobi.',
         isPartOf: {
           '@type': 'WebSite',
           '@id': `${baseUrl}/#website`,

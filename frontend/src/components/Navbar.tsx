@@ -40,9 +40,11 @@ export function Navbar() {
     };
   }, []);
 
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   useEffect(() => {
     const desktopQuery = window.matchMedia('(min-width: 1280px)');

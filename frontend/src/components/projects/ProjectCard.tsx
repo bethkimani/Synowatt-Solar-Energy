@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowUpRightIcon, MapPinIcon } from 'lucide-react';
 import type { Project } from '../../types/content';
 
@@ -14,11 +15,13 @@ export function ProjectCard({ project }: ProjectCardProps) {
       className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_1px_2px_rgba(34,34,34,0.06)] ring-1 ring-ink/[0.07] transition-[box-shadow,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_24px_50px_rgba(34,34,34,0.12)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
       
       <div className="relative aspect-[4/3] overflow-hidden">
-        <img
+        <Image
           src={project.image}
           alt={project.title}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]" />
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.06]"
+        />
         
         <div className="absolute inset-0 bg-ink/0 transition-colors duration-200 group-hover:bg-ink/30" />
         <span className="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand-deep shadow-sm backdrop-blur-sm">
