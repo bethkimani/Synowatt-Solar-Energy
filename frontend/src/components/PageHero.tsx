@@ -1,3 +1,5 @@
+'use client';
+
 import React, { ReactNode, useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import Link from 'next/link';

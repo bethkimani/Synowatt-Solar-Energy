@@ -88,7 +88,20 @@ export function Navbar() {
     };
   }, [open]);
 
-  const solid = scrolled || open;
+  // Pages that feature a dark hero banner at the top, allowing a transparent navbar before scroll.
+  // All sub-pages (e.g. /services/[slug], /solutions/[slug], /projects/[slug], /solar-calculator)
+  // start with a light background and therefore MUST have a solid white navbar from the start.
+  const hasDarkHero =
+    pathname === '/' ||
+    pathname === '/about' ||
+    pathname === '/services' ||
+    pathname === '/solutions' ||
+    pathname === '/projects' ||
+    pathname === '/why-synowatt' ||
+    pathname === '/contact' ||
+    pathname === '/blog';
+
+  const solid = !hasDarkHero || scrolled || open;
 
   const lineTransition = {
     duration: 0.2,

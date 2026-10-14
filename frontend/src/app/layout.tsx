@@ -6,9 +6,13 @@ import { Navbar } from '@/components/Navbar';
 import './global.css';
 
 export const metadata: Metadata = {
-  title: 'Synowatt Solar Energy',
+  metadataBase: new URL('https://www.synowatt.com'),
+  title: {
+    default: 'Synowatt Solar Energy | Solar Power Systems & Lithium Storage Kenya',
+    template: '%s | Synowatt Solar Energy Kenya',
+  },
   description:
-    'Reliable solar energy solutions for homes, businesses and institutions in Kenya — hybrid solar systems, lithium battery storage, professional installation and support.',
+    'EPRA-certified solar engineering contractor in Kenya. Hybrid solar systems, Tier-1 monocrystalline panels, LiFePO4 battery storage, solar water pumping, and maintenance across Nairobi and nationwide.',
 };
 
 export const viewport: Viewport = {
@@ -19,12 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" data-scroll-behavior="smooth">
-      <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <FloatingContact />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

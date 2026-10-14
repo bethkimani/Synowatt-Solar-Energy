@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
@@ -28,10 +30,13 @@ export function WhyPreview() {
               className="mt-8 aspect-[16/11] rounded-3xl" />
             
           </Reveal>
-          <Reveal delay={0.15} className="mt-8">
+          <Reveal delay={0.15} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link href="/why-synowatt" className={`${buttonClasses('primary', 'lg')} group`}>
               Discover Why Synowatt
               <ArrowRightIcon className="h-4 w-4 transition-transform duration-150 group-hover:translate-x-0.5" />
+            </Link>
+            <Link href="/projects" className={buttonClasses('white', 'lg')}>
+              View Our Installations
             </Link>
           </Reveal>
         </div>

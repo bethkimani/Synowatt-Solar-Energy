@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
@@ -10,25 +10,64 @@ import { ArticleContent } from '@/components/blog/ArticleContent';
 import { TableOfContents } from '@/components/blog/TableOfContents';
 import { ShareLinks } from '@/components/blog/ShareLinks';
 import { RelatedPosts } from '@/components/blog/RelatedPosts';
+import { BlogPostDetailSkeleton } from '@/components/blog/BlogSkeleton';
 import { Reveal } from '@/components/Reveal';
 import { SunRays } from '@/components/SunRays';
 import NotFound from '@/app/NotFound';
-import { blogPosts } from '@/data/blogPosts';
 import { blogAuthor } from '@/data/blogCategories';
 import { company } from '@/data/company';
 import { useSeo } from '@/hooks/useSeo';
 import { getRelatedPosts } from '@/utils/blog';
 import { buttonClasses } from '@/utils/button';
 import { articleJsonLd } from '@/utils/seo';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/sanity/api';
+import type { BlogPost } from '@/types/content';
 
 export default function BlogPostPage() {
   const params = useParams<{ slug: string }>();
-  const slug = params.slug;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const slug = params?.slug;
+
+  const [post, setPost] = useState<BlogPost | null>(null);
+  const [allPosts, setAllPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!slug) return;
+    let isMounted = true;
+
+    // Load full post from Sanity
+    getBlogPostBySlug(slug)
+      .then((found) => {
+        if (isMounted) {
+          if (found) {
+            setPost(found);
+          }
+          setIsLoading(false);
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching post:', err);
+        if (isMounted) {
+          setIsLoading(false);
+        }
+      });
+
+    getAllBlogPosts()
+      .then((posts) => {
+        if (isMounted && posts && posts.length > 0) {
+          setAllPosts(posts);
+        }
+      })
+      .catch((err) => console.error('Error fetching all posts:', err));
+
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
 
   useSeo({
-    title: post?.seoTitle ?? 'Article not found',
-    description: post?.metaDescription ?? 'This article could not be found.',
+    title: post?.seoTitle ?? (isLoading ? 'Loading article...' : 'Article not found'),
+    description: post?.metaDescription ?? (isLoading ? '' : 'This article could not be found.'),
     image: post?.coverImage,
     type: post ? 'article' : 'website',
     jsonLd: post
@@ -36,35 +75,50 @@ export default function BlogPostPage() {
           post,
           `${typeof window === 'undefined' ? `https://${company.website}` : window.location.origin}/blog/${post.slug}`
         )
-      : undefined
+      : undefined,
   });
 
-  if (!post) return <NotFound />;
+  if (isLoading) {
+    return <BlogPostDetailSkeleton />;
+  }
 
-  const related = getRelatedPosts(post, blogPosts);
+  if (!post) {
+    return <NotFound />;
+  }
+
+  const related = getRelatedPosts(post, allPosts);
   const showToc = post.sections.length >= 3;
+  const articleSchema = articleJsonLd(
+    post,
+    `https://${company.website}/blog/${post.slug}`
+  );
 
   return (
     <>
+      {/* Schema.org Article Structured Data without dangerouslySetInnerHTML */}
+      <script type="application/ld+json">
+        {JSON.stringify(articleSchema)}
+      </script>
+
       <ArticleHeader post={post} />
 
       <section className="bg-white pb-24 pt-14 lg:pb-32 lg:pt-20">
         <div className={`mx-auto grid max-w-6xl gap-12 px-5 lg:px-8 ${showToc ? 'lg:grid-cols-[230px_minmax(0,1fr)] lg:gap-16' : ''}`}>
-          {showToc &&
-          <aside className="hidden lg:block">
+          {showToc && (
+            <aside className="hidden lg:block">
               <div className="sticky top-28 space-y-10">
                 <TableOfContents sections={post.sections} />
                 <ShareLinks title={post.title} layout="stack" />
               </div>
             </aside>
-          }
+          )}
 
           <article className="min-w-0 max-w-[720px]">
-            {showToc &&
-            <div className="mb-10 lg:hidden">
+            {showToc && (
+              <div className="mb-10 lg:hidden">
                 <TableOfContents sections={post.sections} variant="collapsible" />
               </div>
-            }
+            )}
 
             <ArticleContent post={post} />
 
@@ -116,8 +170,8 @@ export default function BlogPostPage() {
 
             <Link
               href="/blog"
-              className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark transition-colors duration-150 hover:text-brand-deep">
-              
+              className="mt-10 inline-flex items-center gap-2 text-sm font-semibold text-brand-dark transition-colors duration-150 hover:text-brand-deep"
+            >
               <ArrowLeftIcon className="h-4 w-4" aria-hidden />
               Back to the blog
             </Link>
@@ -126,6 +180,6 @@ export default function BlogPostPage() {
       </section>
 
       <RelatedPosts posts={related} />
-    </>);
-
+    </>
+  );
 }

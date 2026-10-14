@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef } from 'react';
 import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 
@@ -21,8 +23,8 @@ export function ParallaxImage({ src, alt, className = '', offset = 30 }: Paralla
         alt={alt}
         loading="lazy"
         style={{ y }}
-        className="h-full w-full scale-[1.15] object-cover" />
-      
-    </div>);
-
+        className="h-full w-full scale-[1.15] object-cover"
+      />
+    </div>
+  );
 }

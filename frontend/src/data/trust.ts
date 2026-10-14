@@ -15,78 +15,91 @@ import { images } from './images';
 import type { FlowStage, ProcessStep, Testimonial, WhyPillar } from '../types/content';
 
 export const whyPillars: WhyPillar[] = [
-{
-  theme: 'Built properly from day one',
-  summary: 'Careful installation and quality components give your system the foundation to perform for years.',
-  image: images.installing,
-  imageAlt: 'Technicians installing rooftop solar panels',
-  reasons: [
   {
-    title: 'Professional Installation',
-    description: 'Installed by trained technicians following proper safety and wiring practices.',
-    icon: HardHatIcon
+    theme: 'EPRA-Compliant Engineering from Day One',
+    summary:
+      'Solar is a 25-year infrastructure investment. We never cut corners on switchgear, cabling, or earthing — guaranteeing safety, regulatory compliance, and peak yield.',
+    image: images.installing,
+    imageAlt: 'Certified solar technicians installing rooftop solar panels in Kenya',
+    reasons: [
+      {
+        title: 'Licensed EPRA Solar Technicians',
+        description:
+          'Every system is designed, wired, and commissioned by licensed engineers following EPRA Solar Photovoltaic Regulations, KEBS, and IEEE standards.',
+        icon: HardHatIcon
+      },
+      {
+        title: 'Tier-1 Hardware & Local Warranties',
+        description:
+          'We exclusively deploy Tier-1 monocrystalline panels with 25-year performance warranties, smart hybrid inverters, and Grade-A LiFePO4 lithium batteries.',
+        icon: ShieldCheckIcon
+      }
+    ]
   },
   {
-    title: 'Quality Solar Components',
-    description: 'Inverters, lithium batteries and panels selected for performance and durability.',
-    icon: ShieldCheckIcon
-  }]
-
-},
-{
-  theme: 'Designed around you',
-  summary: 'No guesswork — every recommendation starts with how your property actually uses energy.',
-  image: images.consultation,
-  imageAlt: 'Solar engineer reviewing a design with a client',
-  reasons: [
-  {
-    title: 'Tailored Solar Solutions',
-    description: 'Every system is sized around your actual energy use, property and budget.',
-    icon: SlidersHorizontalIcon
+    theme: 'Tailored Sizing Based on Real Energy Data',
+    summary:
+      'No guesswork or overselling. Every recommendation starts with an audit of your monthly KPLC power bills, appliance duty cycles, and daytime vs. nighttime consumption.',
+    image: images.consultation,
+    imageAlt: 'Synowatt solar engineer reviewing system design and load sizing with a client',
+    reasons: [
+      {
+        title: 'Accurate Load Auditing & Sizing',
+        description:
+          'We calculate your exact daily kilowatt-hour (kWh) demand so your lithium battery and solar array maintain runtime without undercharging.',
+        icon: SlidersHorizontalIcon
+      },
+      {
+        title: 'Transparent Technical Proposals',
+        description:
+          'Clear, itemized proposals detailing inverter capacity, battery kilowatt-hours, panel wattage, projected bill savings, and estimated payback period.',
+        icon: RulerIcon
+      }
+    ]
   },
   {
-    title: 'System Design & Consultation',
-    description: 'We assess your requirements and explain our recommendation clearly before you commit.',
-    icon: RulerIcon
-  }]
-
-},
-{
-  theme: 'With you after installation',
-  summary: 'Solar is a long-term investment, so our support continues long after handover.',
-  image: images.panelCleaning,
-  imageAlt: 'Technician inspecting and cleaning solar panels',
-  reasons: [
-  {
-    title: 'Reliable Technical Support',
-    description: 'Inspection, troubleshooting and help whenever your system needs attention.',
-    icon: HeadsetIcon
+    theme: 'Continuous Support & Lifetime Maintenance',
+    summary:
+      'Our commitment doesn’t stop at system handover. We provide live remote monitoring, scheduled preventative maintenance, and rapid technical dispatch across Kenya.',
+    image: images.panelCleaning,
+    imageAlt: 'Synowatt technician inspecting and cleaning solar panels in Nairobi',
+    reasons: [
+      {
+        title: 'Smart Cloud & Mobile Monitoring',
+        description:
+          'Track real-time solar generation, battery charge percentage, and grid power consumption directly from your smartphone wherever you are.',
+        icon: HeadsetIcon
+      },
+      {
+        title: 'Preventative Operations & Maintenance (O&M)',
+        description:
+          'Scheduled panel cleaning, thermographic inverter inspections, terminal torque checks, and swift warranty replacement parts from Nairobi.',
+        icon: WrenchIcon
+      }
+    ]
   },
   {
-    title: 'Long-Term Maintenance Support',
-    description: 'Scheduled checks and maintenance help keep your system performing as it should.',
-    icon: WrenchIcon
-  }]
-
-},
-{
-  theme: 'Efficient power for every property',
-  summary: 'From family homes to offices and institutions, we design systems that make the most of Kenyan sunshine.',
-  image: images.aerial,
-  imageAlt: 'Aerial view of homes with rooftop solar panels in Nairobi',
-  reasons: [
-  {
-    title: 'Energy-Efficient Solutions',
-    description: 'Designed to make the most of available sunshine and help reduce your power bills.',
-    icon: LeafIcon
-  },
-  {
-    title: 'Residential & Commercial Expertise',
-    description: 'Solutions for homes, offices, businesses and institutions.',
-    icon: Building2Icon
-  }]
-
-}];
+    theme: 'Built for Kenya’s Electrical Realities',
+    summary:
+      'Engineered specifically to withstand Kenya Power grid surges, brownouts, and lightning strikes while maximizing high equatorial solar irradiance.',
+    image: images.aerial,
+    imageAlt: 'Aerial view of residential and commercial solar installations in Kenya',
+    reasons: [
+      {
+        title: 'Sub-10 Millisecond UPS Blackout Transfer',
+        description:
+          'When KPLC power cuts out, the hybrid inverter changes over instantaneously so your computers, TVs, Wi-Fi, and refrigerators never shut down or flicker.',
+        icon: LeafIcon
+      },
+      {
+        title: 'Residential, Commercial & Agricultural Expertise',
+        description:
+          'Proven engineering capability spanning 3.2KVA townhouses to 50kWp+ commercial rooftop plants and solar borehole water pumps across 47 counties.',
+        icon: Building2Icon
+      }
+    ]
+  }
+];
 
 
 export const assessmentFlow: FlowStage[] = [

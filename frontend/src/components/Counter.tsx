@@ -19,8 +19,8 @@ export function Counter({ value, decimals = 0, suffix = '' }: CounterProps) {
   useEffect(() => {
     if (!inView) return;
     if (reduce) {
-      setDisplay(value);
-      return;
+      const id = requestAnimationFrame(() => setDisplay(value));
+      return () => cancelAnimationFrame(id);
     }
     const controls = animate(0, value, {
       duration: 1.2,
