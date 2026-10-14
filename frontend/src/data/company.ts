@@ -7,7 +7,7 @@ export const company = {
   whatsappNumber: '254799188830',
   whatsappHref:
   'https://wa.me/254799188830?text=Hello%20Synowatt%2C%20I%27d%20like%20to%20enquire%20about%20a%20solar%20solution.',
-  email: 'info@synowatt.com',
+  email: 'synowatt@gmail.com',
   website: 'www.synowatt.com',
   location: 'Mountain Mall, Thika Road, Nairobi',
   mapEmbed: 'https://www.google.com/maps?q=Mountain+Mall+Thika+Road+Nairobi&output=embed',

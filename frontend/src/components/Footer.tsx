@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { MailIcon, MapPinIcon, PhoneIcon } from 'lucide-react';
 import { SocialIcon } from './SocialIcon';
 import { company } from '../data/company';
@@ -14,7 +15,7 @@ export function Footer() {
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
           <div>
             <div className="flex items-center gap-3">
-              <img src={company.logo} alt="" className="h-14 w-14 rounded-full bg-white object-contain" />
+              <Image src={company.logo} alt={company.name} width={56} height={56} className="h-14 w-14 rounded-full bg-white object-contain" />
               <div>
                 <p className="font-display text-lg font-extrabold leading-tight">
                   <span className="text-brand">Syno</span>

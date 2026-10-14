@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import React, { Suspense } from 'react';
+import React from 'react';
 import { ProjectsContent } from './ProjectsContent';
 import { company } from '@/data/company';
 import { images } from '@/data/images';

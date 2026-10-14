@@ -8,7 +8,7 @@ import { contactPageJsonLd } from '@/utils/seo';
 export const metadata: Metadata = {
   title: 'Contact Us & Request a Free Solar Quote | Synowatt Power & Solar Ltd Kenya',
   description:
-    'Request a free solar energy quote and site assessment from Synowatt Power & Solar Ltd. Call or WhatsApp +254 799 188 830, email info@synowatt.com, or visit our offices at Mountain Mall, Thika Road, Nairobi.',
+    'Request a free solar energy quote and site assessment from Synowatt Power & Solar Ltd. Call or WhatsApp +254 799 188 830, email synowatt@gmail.com, or visit our offices at Mountain Mall, Thika Road, Nairobi.',
   keywords: [
     'contact synowatt solar',
     'solar quote kenya',

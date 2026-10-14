@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { company } from '../data/company';
 
 interface LogoProps {
@@ -14,12 +15,15 @@ export function Logo({ light = false, compact = false }: LogoProps) {
       className="flex shrink-0 items-center gap-3 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       aria-label={`${company.name} — home`}>
       
-      <img
+      <Image
         src={company.logo}
-        alt=""
+        alt={company.name}
+        width={48}
+        height={48}
         className={`rounded-full bg-white object-contain ring-1 ring-black/5 transition-[width,height] duration-200 ease-out ${
-        compact ? 'h-10 w-10' : 'h-12 w-12'}`
-        } />
+          compact ? 'h-10 w-10' : 'h-12 w-12'
+        }`}
+      />
       
       <span className="leading-tight">
         <span className="block font-display text-lg font-extrabold tracking-tight">

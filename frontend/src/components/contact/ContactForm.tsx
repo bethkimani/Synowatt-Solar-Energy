@@ -1,6 +1,6 @@
 'use client';
 
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -45,22 +45,25 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
   const [prefilled, setPrefilled] = useState<string | null>(null);
 
-  useEffect(() => {
+  const [appliedParams, setAppliedParams] = useState<string | null>(null);
+
+  const paramKey = params.toString();
+  if (appliedParams !== paramKey) {
+    setAppliedParams(paramKey);
     const service = services.find((s) => s.slug === params.get('service'));
     const pkg = solarPackages.find((p) => p.slug === params.get('solution'));
     const propertyParam = params.get('property')?.toLowerCase();
     const property = propertyTypes.find((p) => p.toLowerCase() === propertyParam);
-    if (!service && !pkg && !property) return;
-
-    setStatus('idle');
-    setForm((f) => ({
-      ...f,
-      service: service?.title ?? f.service,
-      solution: pkg?.name ?? f.solution,
-      property: property ?? f.property
-    }));
-    setPrefilled(pkg?.name ?? service?.title ?? `${property} solar`);
-  }, [params]);
+    if (service || pkg || property) {
+      setForm((f) => ({
+        ...f,
+        service: service?.title ?? f.service,
+        solution: pkg?.name ?? f.solution,
+        property: property ?? f.property
+      }));
+      setPrefilled(pkg?.name ?? service?.title ?? `${property} solar`);
+    }
+  }
 
   const update = (key: keyof FormState, value: string) => {
     setForm((f) => ({ ...f, [key]: value }));

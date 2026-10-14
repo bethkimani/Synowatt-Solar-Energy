@@ -17,7 +17,6 @@ import {
 import { Reveal } from '../Reveal';
 import type { Project } from '../../types/content';
 import { projects } from '../../data/projects';
-import { company } from '../../data/company';
 import { buttonClasses } from '../../utils/button';
 import { quoteHref } from '../../utils/quote';
 
@@ -174,14 +173,14 @@ export function ProjectDetail({ project }: ProjectDetailProps) {
               <div className="mt-6 rounded-2xl bg-white p-5 border border-ink/[0.06] shadow-sm">
                 <p className="text-xs font-bold uppercase tracking-wider text-brand-dark">Measurable Outcome</p>
                 <p className="mt-2 text-sm sm:text-base leading-relaxed text-ink/85 font-medium">
-                  "{project.impact}"
+                  &ldquo;{project.impact}&rdquo;
                 </p>
               </div>
             )}
 
             <div className="mt-6 space-y-2 text-xs text-ink/70">
               <p>• 100% compliant with EPRA Solar PV regulations in Kenya.</p>
-              <p>• Backed by Synowatt's comprehensive workmanship and equipment warranties.</p>
+              <p>• Backed by Synowatt&apos;s comprehensive workmanship and equipment warranties.</p>
             </div>
           </div>
 

@@ -1,8 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import { Footer } from '@/components/Footer';
-import { FloatingContact } from '@/components/FloatingContact';
-import { Navbar } from '@/components/Navbar';
 import './global.css';
 
 export const metadata: Metadata = {

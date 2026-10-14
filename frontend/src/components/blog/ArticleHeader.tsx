@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronRightIcon } from 'lucide-react';
 import { SunRays } from '../SunRays';
 import { PostMeta } from './PostMeta';
@@ -52,7 +53,7 @@ export function ArticleHeader({ post }: ArticleHeaderProps) {
           </motion.p>
           <motion.div variants={item} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
             <span className="flex items-center gap-3">
-              <img src={company.logo} alt="" className="h-10 w-10 rounded-full bg-white object-contain" />
+              <Image src={company.logo} alt={company.name} width={40} height={40} className="h-10 w-10 rounded-full bg-white object-contain" />
               <span className="leading-tight">
                 <span className="block text-sm font-semibold text-white">{post.author}</span>
                 <span className="block text-xs text-white/60">{company.name}</span>

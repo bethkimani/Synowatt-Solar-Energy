@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { CheckIcon, EyeIcon, MessageCircleIcon, TargetIcon, ArrowRightIcon } from 'lucide-react';
 import { PageHero } from '@/components/PageHero';
 import { ParallaxImage } from '@/components/ParallaxImage';
@@ -115,10 +116,11 @@ export function AboutContent() {
               transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.2 }}
               className="absolute -bottom-6 left-4 hidden w-56 overflow-hidden rounded-2xl border-4 border-white shadow-xl sm:block lg:-left-8"
             >
-              <img
+              <Image
                 src={images.inverterBattery}
                 alt="Hybrid inverter and lithium battery storage installation"
-                loading="lazy"
+                width={224}
+                height={168}
                 className="aspect-[4/3] w-full object-cover"
               />
             </motion.div>

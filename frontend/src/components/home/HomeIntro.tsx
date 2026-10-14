@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRightIcon } from 'lucide-react';
 import { ParallaxImage } from '../ParallaxImage';
 import { Reveal } from '../Reveal';
@@ -30,10 +31,11 @@ export function HomeIntro() {
             transition={{ duration: 0.3, ease: EASE_OUT, delay: 0.2 }}
             className="absolute -bottom-6 right-4 hidden w-56 overflow-hidden rounded-2xl border-4 border-white shadow-xl sm:block lg:-right-8"
           >
-            <img
+            <Image
               src={images.panelCleaning}
               alt="Technician inspecting and cleaning commercial solar panels in Nairobi"
-              loading="lazy"
+              width={224}
+              height={168}
               className="aspect-[4/3] w-full object-cover"
             />
           </motion.div>

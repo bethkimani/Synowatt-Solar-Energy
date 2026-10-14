@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ArrowRightIcon } from 'lucide-react';
 import { PostMeta } from './PostMeta';
 import type { BlogPost } from '../../types/content';
@@ -17,11 +18,13 @@ export function BlogCard({ post, headingLevel = 'h3' }: BlogCardProps) {
       className="group flex h-full flex-col overflow-hidden rounded-3xl bg-white ring-1 ring-ink/[0.06] transition-[box-shadow,transform] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(34,34,34,0.10)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent">
       
       <div className="relative aspect-[16/10] overflow-hidden">
-        <img
+        <Image
           src={post.coverImage}
           alt={post.coverAlt}
-          loading="lazy"
-          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.05]" />
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-[1.05]"
+        />
         
         <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-xs font-semibold text-brand-deep shadow-sm">
           {post.category}

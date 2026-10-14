@@ -8,7 +8,6 @@ import {
   ArrowRightIcon,
   CheckCircle2Icon,
   ChevronDownIcon,
-  HelpCircleIcon,
   ShieldCheckIcon,
   SparklesIcon,
   WrenchIcon,

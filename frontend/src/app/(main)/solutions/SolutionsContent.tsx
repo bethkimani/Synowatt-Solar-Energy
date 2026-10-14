@@ -7,10 +7,8 @@ import Image from 'next/image';
 import {
   ArrowRightIcon,
   BatteryChargingIcon,
-  CheckCircle2Icon,
   ChevronDownIcon,
   CpuIcon,
-  HelpCircleIcon,
   MessageCircleIcon,
   ShieldCheckIcon,
   SparklesIcon,
