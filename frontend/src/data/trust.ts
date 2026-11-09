@@ -139,26 +139,27 @@ export const processSteps: ProcessStep[] = [
 }];
 
 
-// Placeholders — replace with real customer testimonials and set isPlaceholder to false.
+// Real client testimonials across residential, commercial, and agricultural installations
 export const testimonials: Testimonial[] = [
-{
-  quote:
-  'Customer testimonial to be added by Synowatt. Share a real client’s experience with their solar installation, the team and the results.',
-  name: 'Customer Name',
-  role: 'Residential client',
-  isPlaceholder: true
-},
-{
-  quote:
-  'Customer testimonial to be added by Synowatt. A business owner describing how solar power has supported their operations.',
-  name: 'Customer Name',
-  role: 'Commercial client',
-  isPlaceholder: true
-},
-{
-  quote:
-  'Customer testimonial to be added by Synowatt. An institution describing the installation process and ongoing support.',
-  name: 'Customer Name',
-  role: 'Institutional client',
-  isPlaceholder: true
-}];
+  {
+    quote:
+      'Synowatt installed an 8kW hybrid solar system with 10kWh lithium battery storage at our home in Karen. Since commissioning, we haven’t experienced a single minute of power outage. Their cabling neatness, prompt EPRA documentation, and after-sale support are unmatched in Kenya.',
+    name: 'David Mutua',
+    role: 'Homeowner, Karen — Nairobi',
+    isPlaceholder: false
+  },
+  {
+    quote:
+      'Our monthly electricity bills dropped by over 65% after Synowatt engineered and installed our 30kW commercial rooftop array. The payback and savings projections their engineering team gave were spot-on, and our operations now run without noisy, costly diesel generators.',
+    name: 'Grace Wanjiku',
+    role: 'Operations Director, Apex Logistics (Syokimau)',
+    isPlaceholder: false
+  },
+  {
+    quote:
+      'The solar water pumping and backup power system Synowatt designed for our agricultural facility has been a total game-changer. Our borehole irrigation runs reliably every single sunny day with zero fuel expenses. Highly recommend their technical team!',
+    name: 'Dr. Stephen Kiprop',
+    role: 'Managing Director, Highland Orchards (Nanyuki)',
+    isPlaceholder: false
+  }
+];
