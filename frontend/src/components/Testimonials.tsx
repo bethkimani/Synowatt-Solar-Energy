@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRightIcon, QuoteIcon } from 'lucide-react';
+import { ArrowRightIcon, QuoteIcon, StarIcon } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { testimonials } from '../data/trust';
 
@@ -29,7 +29,14 @@ export function Testimonials() {
               transition={{ duration: 0.3, delay: index * 0.08 }}
               className="flex h-full flex-col rounded-3xl bg-white p-7 ring-1 ring-ink/[0.06] shadow-sm"
             >
-              <QuoteIcon className="h-8 w-8 text-accent" aria-hidden />
+              <div className="flex items-center justify-between">
+                <QuoteIcon className="h-8 w-8 text-accent" aria-hidden />
+                <div className="flex gap-1 text-amber-400" aria-label="5 out of 5 stars">
+                  {[...Array(5)].map((_, i) => (
+                    <StarIcon key={i} className="h-4 w-4 fill-amber-400 text-amber-400" aria-hidden />
+                  ))}
+                </div>
+              </div>
               <p className="mt-5 flex-1 text-lg leading-relaxed text-ink/75">“{item.quote}”</p>
               <div className="mt-6 border-t border-ink/10 pt-5">
                 <p className="font-display text-xl font-bold text-ink">{item.name}</p>
